@@ -251,3 +251,59 @@ document.addEventListener("keydown", (event) => {
 
 renderCalendar();
 renderTodos();
+
+/* ---------- 古典指針時鐘 ---------- ---------- */
+
+const clockMarks = document.querySelector("#clock-marks");
+const hourHand = document.querySelector("#hour-hand");
+const minuteHand = document.querySelector("#minute-hand");
+const secondHand = document.querySelector("#second-hand");
+const clockText = document.querySelector("#clock-text");
+
+// 繪製 60 個刻度（每 5 個為一大刻度）
+function buildClockMarks() {
+  const cx = 100;
+  const cy = 100;
+  const outer = 88;
+  let marks = "";
+  for (let i = 0; i < 60; i++) {
+    const angle = (i * 6 - 90) * (Math.PI / 180);
+    const isMajor = i % 5 === 0;
+    const inner = isMajor ? 74 : 80;
+    const x1 = cx + inner * Math.cos(angle);
+    const y1 = cy + inner * Math.sin(angle);
+    const x2 = cx + outer * Math.cos(angle);
+    const y2 = cy + outer * Math.sin(angle);
+    marks += `<line class="mark ${isMajor ? "mark-major" : "mark-minor"}" x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" />`;
+  }
+  clockMarks.innerHTML = marks;
+}
+
+function setRotation(el, degrees) {
+  el.setAttribute("transform", `rotate(${degrees} 100 100)`);
+}
+
+function pad2(n) {
+  return String(n).padStart(2, "0");
+}
+
+function tickClock() {
+  const now = new Date();
+  const seconds = now.getSeconds() + now.getMilliseconds() / 1000;
+  const minutes = now.getMinutes() + seconds / 60;
+  const hours = (now.getHours() % 12) + minutes / 60;
+
+  setRotation(secondHand, seconds * 6);
+  setRotation(minuteHand, minutes * 6);
+  setRotation(hourHand, hours * 30);
+
+  clockText.textContent = `${pad2(now.getHours())}：${pad2(now.getMinutes())}：${pad2(now.getSeconds())}`;
+}
+
+function initClock() {
+  buildClockMarks();
+  tickClock();
+  setInterval(tickClock, 1000);
+}
+
+initClock();

@@ -14,9 +14,31 @@
     <main class="app-shell">
       <section class="todo-card" aria-labelledby="page-title">
         <header class="app-header">
-          <p class="eyebrow">MINIMAL TODO</p>
-          <h1 id="page-title">今日待辦</h1>
-          <p class="subtitle">把重要的事寫下來，一件一件完成。</p>
+          <div class="header-main">
+            <div>
+              <p class="eyebrow">MINIMAL TODO</p>
+              <h1 id="page-title">今日待辦</h1>
+              <p class="subtitle">把重要的事寫下來，一件一件完成。</p>
+            </div>
+            <figure class="clock" aria-label="目前時間" role="timer">
+              <svg
+                id="analog-clock"
+                class="clock-face"
+                viewBox="0 0 200 200"
+                aria-hidden="true"
+              >
+                <circle class="clock-ring" cx="100" cy="100" r="94" />
+                <circle class="clock-dial" cx="100" cy="100" r="88" />
+                <g id="clock-marks"></g>
+                <line class="clock-hand hour" id="hour-hand" x1="100" y1="100" x2="100" y2="55" />
+                <line class="clock-hand minute" id="minute-hand" x1="100" y1="100" x2="100" y2="38" />
+                <line class="clock-hand second" id="second-hand" x1="100" y1="108" x2="100" y2="32" />
+                <circle class="clock-pin" cx="100" cy="100" r="5" />
+                <circle class="clock-pin-center" cx="100" cy="100" r="2" />
+              </svg>
+              <figcaption id="clock-text" class="clock-text"></figcaption>
+            </figure>
+          </div>
         </header>
 
         <div class="layout">
