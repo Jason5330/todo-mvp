@@ -164,6 +164,11 @@ h1 {
   align-items: center;
   min-width: 0;
   gap: 12px;
+}
+
+.todo-toggle-control {
+  display: flex;
+  align-items: center;
   cursor: pointer;
 }
 
@@ -212,11 +217,24 @@ h1 {
 .todo-text {
   overflow-wrap: anywhere;
   line-height: 1.5;
+  cursor: text;
 }
 
 .todo-item.is-complete .todo-text {
   color: #9c988f;
   text-decoration: line-through;
+}
+
+.edit-input {
+  width: 100%;
+  min-width: 0;
+  padding: 7px 9px;
+  border: 1px solid #d15d39;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: inherit;
+  box-shadow: 0 0 0 3px rgba(209, 93, 57, 0.12);
 }
 
 .delete-button {

@@ -39,9 +39,15 @@ function renderTodos() {
     item.dataset.id = todo.id;
     item.classList.toggle("is-complete", todo.completed);
     toggle.checked = todo.completed;
+    toggle.setAttribute(
+      "aria-label",
+      `${todo.completed ? "標記為未完成" : "標記為已完成"}：${todo.text}`,
+    );
     text.textContent = todo.text;
+    text.title = "雙擊編輯";
 
     toggle.addEventListener("change", () => toggleTodo(todo.id));
+    text.addEventListener("dblclick", () => startEditing(todo, text));
     deleteButton.addEventListener("click", () => deleteTodo(todo.id));
     list.append(fragment);
   });
@@ -63,6 +69,50 @@ function toggleTodo(id) {
   );
   saveTodos();
   renderTodos();
+}
+
+function startEditing(todo, textElement) {
+  const editor = document.createElement("input");
+  editor.className = "edit-input";
+  editor.type = "text";
+  editor.maxLength = 120;
+  editor.value = todo.text;
+  editor.setAttribute("aria-label", "編輯待辦事項");
+
+  let isFinished = false;
+
+  function finishEditing(shouldSave) {
+    if (isFinished) return;
+    isFinished = true;
+
+    const nextText = editor.value.trim();
+
+    if (shouldSave && nextText) {
+      todos = todos.map((item) =>
+        item.id === todo.id ? { ...item, text: nextText } : item,
+      );
+      saveTodos();
+    }
+
+    renderTodos();
+  }
+
+  editor.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      finishEditing(true);
+    }
+
+    if (event.key === "Escape") {
+      event.preventDefault();
+      finishEditing(false);
+    }
+  });
+
+  editor.addEventListener("blur", () => finishEditing(true));
+  textElement.replaceWith(editor);
+  editor.focus();
+  editor.select();
 }
 
 function deleteTodo(id) {
