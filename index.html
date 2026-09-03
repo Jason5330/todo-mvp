@@ -45,11 +45,13 @@
 
     <template id="todo-template">
       <li class="todo-item">
-        <label class="todo-content">
-          <input class="todo-toggle" type="checkbox" />
-          <span class="todo-check" aria-hidden="true"></span>
+        <div class="todo-content">
+          <label class="todo-toggle-control">
+            <input class="todo-toggle" type="checkbox" />
+            <span class="todo-check" aria-hidden="true"></span>
+          </label>
           <span class="todo-text"></span>
-        </label>
+        </div>
         <button class="delete-button" type="button" aria-label="刪除待辦">刪除</button>
       </li>
     </template>
