@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="一個簡潔、免安裝的瀏覽器待辦清單。"
+    />
+    <title>今日待辦</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="todo-card" aria-labelledby="page-title">
+        <header class="app-header">
+          <p class="eyebrow">MINIMAL TODO</p>
+          <h1 id="page-title">今日待辦</h1>
+          <p class="subtitle">把重要的事寫下來，一件一件完成。</p>
+        </header>
+
+        <form id="todo-form" class="todo-form">
+          <label class="sr-only" for="todo-input">新增待辦事項</label>
+          <input
+            id="todo-input"
+            name="todo"
+            type="text"
+            maxlength="120"
+            placeholder="例如：整理會議筆記"
+            autocomplete="off"
+            required
+          />
+          <button type="submit">新增</button>
+        </form>
+
+        <div class="list-heading">
+          <h2>清單</h2>
+          <p id="todo-count" aria-live="polite">0 件未完成</p>
+        </div>
+
+        <p id="empty-state" class="empty-state">目前沒有待辦，先新增一件吧。</p>
+        <ul id="todo-list" class="todo-list" aria-label="待辦事項"></ul>
+      </section>
+    </main>
+
+    <template id="todo-template">
+      <li class="todo-item">
+        <label class="todo-content">
+          <input class="todo-toggle" type="checkbox" />
+          <span class="todo-check" aria-hidden="true"></span>
+          <span class="todo-text"></span>
+        </label>
+        <button class="delete-button" type="button" aria-label="刪除待辦">刪除</button>
+      </li>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
