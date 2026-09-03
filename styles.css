@@ -225,6 +225,97 @@ button {
   margin-bottom: 32px;
 }
 
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+@media (max-width: 620px) {
+  .header-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+/* ---------- 古典指針時鐘 ---------- */
+
+.clock {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.clock-face {
+  width: 168px;
+  height: 168px;
+  display: block;
+  filter: drop-shadow(0 10px 24px rgba(41, 37, 29, 0.18));
+}
+
+.clock-ring {
+  fill: #3a2f24;
+}
+
+.clock-dial {
+  fill: #fffdf6;
+  stroke: rgba(0, 0, 0, 0.06);
+  stroke-width: 1;
+}
+
+.clock-face .mark {
+  stroke: #3a2f24;
+  stroke-linecap: round;
+}
+
+.clock-face .mark-major {
+  stroke-width: 3.5;
+}
+
+.clock-face .mark-minor {
+  stroke-width: 1.4;
+  opacity: 0.55;
+}
+
+.clock-hand {
+  stroke: #3a2f24;
+  stroke-linecap: round;
+}
+
+.clock-hand.hour {
+  stroke-width: 5.5;
+}
+
+.clock-hand.minute {
+  stroke-width: 3.5;
+}
+
+.clock-hand.second {
+  stroke: #d15d39;
+  stroke-width: 1.6;
+}
+
+.clock-pin {
+  fill: #3a2f24;
+}
+
+.clock-pin-center {
+  fill: #d15d39;
+}
+
+.clock-text {
+  color: #74716a;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
 .eyebrow {
   margin: 0 0 10px;
   color: #d15d39;
