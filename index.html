@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="一個簡潔、免安裝的瀏覽器待辦清單。"
+      content="一個簡潔、免安裝的瀏覽器待辦清單，附日曆檢視。"
     />
     <title>今日待辦</title>
     <link rel="stylesheet" href="styles.css" />
@@ -19,27 +19,50 @@
           <p class="subtitle">把重要的事寫下來，一件一件完成。</p>
         </header>
 
-        <form id="todo-form" class="todo-form">
-          <label class="sr-only" for="todo-input">新增待辦事項</label>
-          <input
-            id="todo-input"
-            name="todo"
-            type="text"
-            maxlength="120"
-            placeholder="例如：整理會議筆記"
-            autocomplete="off"
-            required
-          />
-          <button type="submit">新增</button>
-        </form>
+        <div class="layout">
+          <div class="calendar-panel">
+            <div class="calendar-head">
+              <button id="cal-prev" class="cal-nav" type="button" aria-label="上一個月">‹</button>
+              <h2 id="cal-title" class="cal-title"></h2>
+              <button id="cal-next" class="cal-nav" type="button" aria-label="下一個月">›</button>
+            </div>
 
-        <div class="list-heading">
-          <h2>清單</h2>
-          <p id="todo-count" aria-live="polite">0 件未完成</p>
+            <div class="calendar-weekdays" aria-hidden="true">
+              <span>日</span><span>一</span><span>二</span><span>三</span>
+              <span>四</span><span>五</span><span>六</span>
+            </div>
+
+            <div id="calendar-grid" class="calendar-grid" role="grid"></div>
+
+            <button id="cal-today" class="cal-today" type="button">回到今天</button>
+          </div>
+
+          <div class="list-panel">
+            <p id="selected-date-label" class="selected-date-label"></p>
+
+            <form id="todo-form" class="todo-form">
+              <label class="sr-only" for="todo-input">新增待辦事項</label>
+              <input
+                id="todo-input"
+                name="todo"
+                type="text"
+                maxlength="120"
+                placeholder="例如：整理會議筆記"
+                autocomplete="off"
+                required
+              />
+              <button type="submit">新增</button>
+            </form>
+
+            <div class="list-heading">
+              <h2>清單</h2>
+              <p id="todo-count" aria-live="polite">0 件未完成</p>
+            </div>
+
+            <p id="empty-state" class="empty-state">這天還沒有待辦，先新增一件吧。</p>
+            <ul id="todo-list" class="todo-list" aria-label="待辦事項"></ul>
+          </div>
         </div>
-
-        <p id="empty-state" class="empty-state">目前沒有待辦，先新增一件吧。</p>
-        <ul id="todo-list" class="todo-list" aria-label="待辦事項"></ul>
       </section>
     </main>
 
@@ -54,6 +77,13 @@
         </div>
         <button class="delete-button" type="button" aria-label="刪除待辦">刪除</button>
       </li>
+    </template>
+
+    <template id="cal-day-template">
+      <button class="cal-day" type="button">
+        <span class="cal-day-num"></span>
+        <span class="cal-day-dots" aria-hidden="true"></span>
+      </button>
     </template>
 
     <script src="app.js"></script>
